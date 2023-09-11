@@ -7,3 +7,5 @@ class Solution {
         return answer;
     }
 }
+
+//회고 : 삼항연산자를 활용했다면 좀더 간결한 코드가 됐을것이다.
