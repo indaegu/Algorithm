@@ -5,3 +5,4 @@ class Solution {
         return answer = (number%n==0)&&(number%m==0)?1:0;
     }
 }
+//회고 : 이전문제 부터 계속 answer을 선언해줬었는데 반환할때는 굳이 해주지 않아도 된다.
