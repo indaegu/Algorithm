@@ -22,7 +22,7 @@ class Solution {
         String answer = answer1.concat(LastString);
         
 
-    return answer;
+    return FirstString + overwrite_string + LastString;
     }
 }
                              
