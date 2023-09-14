@@ -9,3 +9,5 @@ class Solution {
         return 0;
     }
 }
+    //회고 : 접두사 처리 함수 : my_string.startsWith(is_prefix)
+    // 접미사 처리 함수 : my_string.endsWith(is_prefix)
