@@ -1,4 +1,5 @@
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Solution {
@@ -9,37 +10,30 @@ public class Solution {
     for (int test_case = 1; test_case <= T; test_case++) {
       int N = sc.nextInt();
       System.out.println("#" + test_case + " ");
-      method(N);
-    }
-  }
+      int[][] triangle = new int[N][N];
 
-  public static void method(int N) {
-    // 첫 번째 줄은 항상 1
-    System.out.println(1);
+      triangle[0][0] = 1; //최상위 층은 1로 고정
+      for (int i = 0; i < N; i++) {
+        triangle[i][0] = 1; // 각 층의 첫번째는 모두 1로 고정
+        triangle[i][i] = 1; // 각 층의 마지막은 모두 1로 고정
+      }
 
-    if (N == 1) return; // N이 1이면 여기서 종료
 
-    // 2D 배열을 사용하여 파스칼의 삼각형을 저장
-    int[][] triangle = new int[N][N];
-    triangle[0][0] = 1;
-
-    for (int i = 1; i < N; i++) {
-      for (int j = 0; j <= i; j++) {
-        // 왼쪽 위의 숫자
-        if (j > 0) {
-          triangle[i][j] += triangle[i-1][j-1];
-        }
-        // 오른쪽 위의 숫자
-        if (j < i) {
-          triangle[i][j] += triangle[i-1][j];
+      for (int i = 2; i < N; i++) {
+        for (int j = 1; j < i; j++) {
+          triangle[i][j] = triangle[i - 1][j - 1] + triangle[i - 1][j]; // 나머지는 본인의 위층의 이전값고 위층의 같은 열의 값을 더한값
         }
       }
 
-      // 한 줄 출력
-      for (int j = 0; j <= i; j++) {
-        System.out.print(triangle[i][j] + " ");
+      for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+          if (triangle[i][j] != 0) {
+            System.out.print(triangle[i][j] + " "); // 0이 아닐때마다 출력
+          }
+        }
+        System.out.println();
       }
-      System.out.println(); // 줄 바꿈
     }
   }
 }
+
