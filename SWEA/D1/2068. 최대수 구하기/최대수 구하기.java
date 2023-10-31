@@ -1,22 +1,20 @@
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Solution {
   public static void main(String args[]) throws Exception {
+    //System.setIn(new FileInputStream("src/input.txt"));
     Scanner sc = new Scanner(System.in);
-    int T;
-    T = sc.nextInt();
-    int[] num = new int[10];
-    int max = 0;
-    for (int j = 1; j <= T; j++) {
-      System.out.print("#" + j + " ");
+    int T = sc.nextInt();
+    for (int test_case = 1; test_case <= T; test_case++) {
+      ArrayList<Integer> arrayList = new ArrayList<>();
       for (int i = 0; i < 10; i++) {
-        num[i] = sc.nextInt();
-        if (num[i] > max) max = num[i];
+        arrayList.add(sc.nextInt());
       }
-      System.out.print(max + " \n");
-      max = 0;
+      int max = Collections.max(arrayList);
+      System.out.println("#" + test_case + " " + max);
     }
   }
 }
-
