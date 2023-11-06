@@ -1,32 +1,30 @@
-    import java.io.FileInputStream;
-    import java.util.Scanner;
+import java.io.FileInputStream;
+import java.util.Scanner;
 
-    public class Solution {
-        public static void main(String args[]) throws Exception {
-            Scanner sc = new Scanner(System.in);
-            int T = sc.nextInt();
-            for (int test_case = 1; test_case <= T; test_case++) {
-                String str = sc.next(); // level
-                int len= str.length();
-                System.out.println("#" + test_case + " " + method(str, len));
+public class Solution {
+    public static void main(String args[]) throws Exception {
+        //System.setIn(new FileInputStream("src/input.txt"));
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        for (int test_case = 1; test_case <= T; test_case++) {
+            System.out.print("#" + test_case + " ");
+            String str = sc.next();
+            StringBuilder stringBuffer = new StringBuilder(str);
+            String front = stringBuffer.substring(0,stringBuffer.length()/2);
+            String back;
+            if(stringBuffer.length() % 2 == 0){
+                back = stringBuffer.substring(stringBuffer.length() / 2, stringBuffer.length());
+                StringBuilder stringBuffer1 = new StringBuilder(back);
+                back = stringBuffer1.reverse().toString();
+                if(front.equals(back)) System.out.println(1);
+                else System.out.println(0);
+            }else{
+                back = stringBuffer.substring(stringBuffer.length() / 2 + 1, stringBuffer.length());
+                StringBuilder stringBuffer1 = new StringBuilder(back);
+                back = stringBuffer1.reverse().toString();
+                if(front.equals(back)) System.out.println(1);
+                else System.out.println(0);
             }
         }
-        public static int method(String str, int len){
-            String front = str.substring(0,len/2);
-            String back;
-            if(len % 2 == 1){
-                back = str.substring(len/2+1,len);
-
-            }else{
-                back = str.substring(len/2,len);
-            }
-            StringBuffer sb = new StringBuffer(back);
-            String reverse = sb.reverse().toString();
-            if(front.equals(reverse)){
-                return 1;
-            }else{
-                return 0;
-            }
-
-     }
     }
+}
