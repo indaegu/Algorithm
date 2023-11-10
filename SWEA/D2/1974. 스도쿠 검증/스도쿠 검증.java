@@ -1,7 +1,5 @@
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Scanner;
 
 public class Solution {
@@ -10,58 +8,49 @@ public class Solution {
     Scanner sc = new Scanner(System.in);
     int T = sc.nextInt();
     for (int test_case = 1; test_case <= T; test_case++) {
+      System.out.print("#" + test_case + " ");
       int[][] arr = new int[9][9];
       for (int i = 0; i < 9; i++) {
-        for (int j = 0; j <9; j++) {
+        for (int j = 0; j < 9; j++) {
           arr[i][j] = sc.nextInt();
         }
       }
-      System.out.println("#" + test_case + " " + method(arr));
-    }
-  }
 
-  public static int method(int[][] arr) {
-    int ans = 1;
-    List<Integer> checkList = new ArrayList<>();
-    for (int i = 0; i < 9; i++) {
-      checkList.clear();
-      for (int j = 0; j < 9; j++) {
-        if (checkList.contains(arr[i][j])) {
-          ans = 0;
-        } else {
-          checkList.add(arr[i][j]);
-        }
-      }
-    }
-    checkList.clear();
-    for (int i = 0; i < 9; i++) {
-      checkList.clear();
-      for (int j = 0; j < 9; j++) {
-        if (checkList.contains(arr[j][i])) {
-          ans = 0;
-        } else {
-          checkList.add(arr[j][i]);
-        }
-      }
-    }
-    checkList.clear();
+      ArrayList<Integer> row = new ArrayList<>();
+      ArrayList<Integer> col = new ArrayList<>();
+      ArrayList<Integer> rec = new ArrayList<>();
 
-    for (int i = 0; i < 6; i+=3) { //3*3 사각형 판단
-      for (int j = 0; j < 6; j+=3) {
-        checkList.clear();
-        for (int k = i; k < i+3; k++) {
-          for (int l = j; l < j+3; l++) {
-            if(checkList.contains(arr[k][l])){
-              ans = 0;
-            } else{
-              checkList.add(arr[k][l]);
-            }
+
+      int result = 0;
+      for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9 ; j++) {
+          if(!row.contains(arr[i][j]) && !col.contains(arr[j][i])){
+            row.add(arr[i][j]);
+            col.add(arr[j][i]);
+            result++;
           }
         }
+        row.clear();
+        col.clear();
+      }
+      for (int k = 0; k <= 6; k+=3) {
+        for (int q = 0; q <= 6; q+=3) {
+          for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+              if(!rec.contains(arr[i+k][j+q])){
+                rec.add(arr[i+k][j+q]);
+                result++;
+              }
+            }
+          }
+          rec.clear();
+        }
+      }
+      if(result==162){
+        System.out.println(1);
+      }else{
+        System.out.println(0);
       }
     }
-    checkList.clear();
-
-    return ans;
   }
 }
